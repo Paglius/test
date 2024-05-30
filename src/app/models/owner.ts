@@ -6,5 +6,5 @@ export interface Owner{
     lastName:string,
     city: string,
     birthday: Date,
-    pets: Pet[]
+    pets: Pet[] | number
 }

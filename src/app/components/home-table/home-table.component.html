@@ -4,8 +4,13 @@
         <button mat-flat-button color="primary"> Remove column </button>
         <button mat-flat-button color="primary"> Shuffle </button>
     </section>
-    <button mat-fab color="primary" aria-label="Example icon button with a delete icon">
+    <button mat-fab color="primary" (click)="openDialog()" aria-label="Example icon button with a delete icon">
         <mat-icon>filter_alt</mat-icon>
     </button>
 </article>
-<app-shared-table></app-shared-table>
+<app-shared-table [columnsToDisplay]="columns" [tableData]="tableData" [paginator]="paginator"></app-shared-table>
+<mat-paginator [length]="100"
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]"
+              aria-label="Select page">
+</mat-paginator>

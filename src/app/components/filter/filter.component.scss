@@ -1,0 +1,12 @@
+form{
+    display: flex;
+    flex-direction: column;
+}
+.ages{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+button[type="submit"]{
+    margin-top: 40px;
+}

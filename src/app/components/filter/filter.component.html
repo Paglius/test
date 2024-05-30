@@ -1,0 +1,45 @@
+<h2 mat-dialog-title>Install Angular</h2>
+<mat-dialog-content class="mat-typography">
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <mat-form-field class="example-form-field">
+        <mat-label>Name</mat-label>
+        <input matInput type="text" formControlName="name">
+        @if (userForm.get('name')) {
+          <button matSuffix mat-icon-button aria-label="Clear" (click)="userForm.get('name')?.setValue('')">
+            <mat-icon>close</mat-icon>
+          </button>
+        }
+      </mat-form-field>
+    <mat-form-field class="example-form-field">
+        <mat-label>Last Name</mat-label>
+        <input matInput type="text" formControlName="lastName">
+        @if (userForm.get('lastName')) {
+          <button matSuffix mat-icon-button aria-label="Clear" (click)="userForm.get('lastName')?.setValue('')">
+            <mat-icon>close</mat-icon>
+          </button>
+        }
+      </mat-form-field>
+    <mat-form-field class="example-form-field">
+        <mat-label>City</mat-label>
+        <input matInput type="text" formControlName="city">
+        @if (userForm.get('name')) {
+            <button matSuffix mat-icon-button aria-label="city" (click)="userForm.get('city')?.setValue('')">
+                <mat-icon>close</mat-icon>
+            </button>
+        }
+    </mat-form-field>
+        
+    <mat-label>Age Range</mat-label>
+    <mat-slider min="0" max="100">
+          <input formControlName="minAge" matSliderStartThumb>
+          <input formControlName="maxAge" matSliderEndThumb>
+    </mat-slider>
+    <section class="ages">
+        <span>{{userForm.get('minAge')?.value}}</span>
+        <span>{{userForm.get('maxAge')?.value}}</span>
+    </section>
+
+        
+    <button mat-raised-button color="primary" [mat-dialog-close]="true" type="submit">Submit</button>
+</form> 
+</mat-dialog-content>
