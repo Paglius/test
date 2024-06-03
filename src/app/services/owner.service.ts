@@ -15,4 +15,8 @@ export class OwnerService {
     return this.http.post<{data: Owner[]}>(`${this.baseUrl}/api/owner`,{filter})
     .pipe(map(response => response.data))
   }
+  getOwner(id: number): Observable<Owner>{
+    return this.http.get<{data: Owner}>(`${this.baseUrl}/api/owner/${id}`)
+    .pipe(map(response => response.data))
+  }
 }

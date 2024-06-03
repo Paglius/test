@@ -1,0 +1,25 @@
+img{
+    height: 15vh;
+    aspect-ratio: 1/1;
+    width: fit-content;
+}
+.logo{
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+.table{
+    margin: 0 auto;
+    display: block;
+    width: 80vw;
+}
+.body{
+    height: calc(100% - 67px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    
+}

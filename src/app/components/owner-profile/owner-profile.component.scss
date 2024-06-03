@@ -1,0 +1,28 @@
+article{
+    display: flex;
+    flex-direction: row;
+    height: calc(100% - 64px);
+    
+}
+.pets-table{
+    width: 70%;
+    padding: 3% 5%;
+}
+.ownerInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 30%;
+    height: 100%;
+    align-items: center;
+    border-left: 2px;
+    border-color: black;
+    img{
+        width: 60%;
+        margin-bottom: 20%;
+    }
+    span{
+        line-height:30px;
+        font-size: 24px;
+    }
+}

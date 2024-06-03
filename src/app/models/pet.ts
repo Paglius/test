@@ -3,4 +3,5 @@ export interface Pet{
     name:string,
     breed: string,
     birthday: Date,
+    age:number
 }

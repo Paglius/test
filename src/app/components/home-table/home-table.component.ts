@@ -7,6 +7,7 @@ import { Owner } from '../../models/owner';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator'
 import { MatDialog } from '@angular/material/dialog';
 import { FilterComponent } from '../filter/filter.component';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-home-table',
@@ -18,17 +19,20 @@ import { FilterComponent } from '../filter/filter.component';
 export class HomeTableComponent implements OnInit {
     protected tableService = inject(OwnerTableService)
     private dialog = inject(MatDialog)
-    columns = ['id','name','lastName','city','birthday','pets']
+    private router = inject(Router)
+    columns = ['name','lastName','city','age','pets']
     tableData: Owner[] = [];
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     ngOnInit(): void {
         this.tableService.owners$.subscribe((data)=>{this.tableData = data })
         this.tableService.setFilter();
-        this.openDialog()
     }
     openDialog() {
-      this.dialog.open(FilterComponent, {
-      });
+        this.dialog.open(FilterComponent, {
+        });
+    }
+    goToOwnerProfile(owner:Owner){
+        this.router.navigate(['/ownerProfile', owner.id])
     }
 
 }

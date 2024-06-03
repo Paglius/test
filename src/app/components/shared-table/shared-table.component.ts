@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import {MatTableDataSource, MatTableModule} from '@angular/material/table';
-import {MatButtonModule} from '@angular/material/button';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
 import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
@@ -29,5 +29,10 @@ export class SharedTableComponent implements OnChanges {
   @Input() tableData: any[] =[];
   @Input({required: true}) columnsToDisplay: string[] =[];
   @Input() paginator!: MatPaginator;
+  @Output() rowClick: EventEmitter<any> = new EventEmitter();
   dataSource = new MatTableDataSource<any>(this.tableData);
+  
+  onRowClick(row: any){
+    this.rowClick.emit(row);
+  }
 }
