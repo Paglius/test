@@ -10,25 +10,14 @@ import { MatPaginator } from '@angular/material/paginator';
   templateUrl: './shared-table.component.html',
   styleUrl: './shared-table.component.scss'
 })
-export class SharedTableComponent implements OnChanges {
-  ngOnChanges(changes: SimpleChanges): void {
-    for (const propName in changes) {
-      switch (propName) {
-        case 'tableData': {
-          this.dataSource.data = this.tableData;
-          break;
-        }
-        case 'paginator': {
-          this.dataSource.paginator  = this.paginator;
-          break
-        }
-      }
-    }
-    
-  }
-  @Input() tableData: any[] =[];
+export class SharedTableComponent {
+  @Input() set tableData (data:any[]) {
+    this.dataSource.data = data;
+  };
+  @Input() set paginator (pag:MatPaginator) {
+    this.dataSource.paginator  = pag;
+  };
   @Input({required: true}) columnsToDisplay: string[] =[];
-  @Input() paginator!: MatPaginator;
   @Output() rowClick: EventEmitter<any> = new EventEmitter();
   dataSource = new MatTableDataSource<any>(this.tableData);
   
