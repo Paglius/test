@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { OwnerService } from './../../services/owner.service';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, Signal } from '@angular/core';
 import { HeaderComponent } from "../header/header.component";
 import { ActivatedRoute } from '@angular/router';
 import { Owner } from '../../models/owner';
@@ -17,12 +17,13 @@ import { SharedTableComponent } from "../shared-table/shared-table.component";
 })
 export class OwnerProfileComponent implements OnInit {
   private activatedRoute = inject(ActivatedRoute);
-  private ownerService = inject(OwnerService);
-  owner$!:Observable<Owner>;
+  owner!:Signal<Owner|undefined>;
   columns=['name', 'breed', 'age']
-  ngOnInit(): void {
+  constructor(ownerService :OwnerService){
     const ownerId = this.activatedRoute.snapshot.params['ownerId']
-    this.owner$ = this.ownerService.getOwner(ownerId);
+    this.owner = ownerService.getOwner(ownerId);
+  }
+  ngOnInit(): void {
   }
 
   getOwnerPhotoId(id:number){

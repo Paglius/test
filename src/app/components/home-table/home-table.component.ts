@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, OnInit, Signal, ViewChild } from '@angular/core';
 import { SharedTableComponent } from "../shared-table/shared-table.component";
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
@@ -21,11 +21,11 @@ export class HomeTableComponent implements OnInit {
     private dialog = inject(MatDialog)
     private router = inject(Router)
     columns = ['name','lastName','city','age','pets']
-    tableData: Owner[] = [];
+    tableData!: Signal<Owner[]>;
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     ngOnInit(): void {
-        this.tableService.owners$.subscribe((data)=>{this.tableData = data })
-        this.tableService.setFilter();
+        this.tableData = this.tableService.filteredOwners;
+        this.tableService.filter.set({})
     }
     openDialog() {
         this.dialog.open(FilterComponent, {

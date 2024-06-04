@@ -1,16 +1,16 @@
 <app-header></app-header>
-<article *ngIf="owner$ | async as owner">
+<article *ngIf="owner()">
     <section class="ownerInfo">
-        <img src="../../../assets/user{{ getOwnerPhotoId(owner.id) }}.png" alt="">
-        <span>{{owner.name + ' ' + owner.lastName}}</span>
+        <img src="../../../assets/user{{ getOwnerPhotoId(owner().id) }}.png" alt="">
+        <span>{{owner().name + ' ' + owner().lastName}}</span>
         <div class="city">
             <mat-icon>location_on</mat-icon>
-            <span>{{owner.city}}</span>
+            <span>{{owner().city}}</span>
         </div>
-        <span>{{owner.age}} years</span>
+        <span>{{owner().age}} years</span>
     </section>
     <section class="pets-table">
         <h2>Pets</h2>
-        <app-shared-table [columnsToDisplay]="columns" [tableData]="owner.petList" ></app-shared-table>
+        <app-shared-table [columnsToDisplay]="columns" [tableData]="owner().petList" ></app-shared-table>
     </section>
 </article>

@@ -1,7 +1,7 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal, Signal } from '@angular/core';
 import { OwnerService } from './owner.service';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { Owner } from '../models/owner';
+import { switchMap } from 'rxjs';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root'
@@ -10,21 +10,12 @@ export class OwnerTableService {
 
   constructor() { }
   private ownerService = inject(OwnerService);
-  private ownersSubject = new BehaviorSubject<Owner[]>([]);
-  owners$: Observable<Owner[]> = this.ownersSubject.asObservable();
-  private filter:any = {};
-  getFilteredOwners():Observable<Owner[]>{
-    return this.ownerService.getOwners();
-  }
-
-  setFilter(filter:any = {}){
-    this.filter = filter;
-    this.ownerService.getOwners(filter).subscribe(data =>
-      this.ownersSubject.next(data)
+  filter = signal({});
+  filteredOwners = toSignal(
+    toObservable(this.filter)
+    .pipe(
+      switchMap( filter => this.ownerService.getOwners(filter))
     )
-  }
+  , {initialValue: []})
 
-  getFilter(){
-    return this.filter;
-  }
 }

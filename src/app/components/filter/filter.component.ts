@@ -23,15 +23,15 @@ export class FilterComponent implements OnInit {
       lastName: [''],
       city: [''],
       minAge: [0],
-      maxAge:[100]// default value for the range slider
+      maxAge:[100]
     });
   }
   ngOnInit(): void {
-    const currentFilter = this.tableService.getFilter();
+    const currentFilter = this.tableService.filter();
     this.userForm.patchValue(currentFilter);
   }
 
   onSubmit() {
-    this.tableService.setFilter(this.userForm.value)
+    this.tableService.filter.set(this.userForm.value)
   }
 }
